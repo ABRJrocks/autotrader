@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Auto Trader",
+  "name": "Auto AI Trader",
   "icons": [
     {
       "src": "favicon.ico",
