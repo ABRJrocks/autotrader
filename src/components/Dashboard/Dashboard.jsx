@@ -1,6 +1,8 @@
 // src/Home.js
 import React, { useEffect, useRef, useState } from "react";
 import { createChart } from "lightweight-charts"; // Import TradingView Lightweight Charts
+import Chart from "./Chart";
+import History from "./TradingHistory";
 
 function Home() {
   const chartContainerRef = useRef();
@@ -13,7 +15,7 @@ function Home() {
   const fetchChartData = async () => {
     try {
       const response = await fetch(
-        "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24"
+        "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24",
       );
       const data = await response.json();
 
@@ -35,14 +37,14 @@ function Home() {
   const fetchTradingHistory = async () => {
     try {
       const response = await fetch(
-        "https://api.coincap.io/v2/assets?limit=10&sort=changePercent24Hr"
+        "https://api.coincap.io/v2/assets?limit=10&sort=changePercent24Hr",
       );
       const data = await response.json();
 
       if (data.data) {
         // Sort to get top gainers and losers
         const sortedData = data.data.sort(
-          (a, b) => b.changePercent24Hr - a.changePercent24Hr
+          (a, b) => b.changePercent24Hr - a.changePercent24Hr,
         );
         const topGainers = sortedData.slice(0, 5);
         const topLosers = sortedData.slice(-5);
@@ -59,7 +61,7 @@ function Home() {
   const fetchLiveDeck = async () => {
     try {
       const response = await fetch(
-        "https://api.coincap.io/v2/assets?limit=10&sort=marketCap"
+        "https://api.coincap.io/v2/assets?limit=10&sort=marketCap",
       );
       const data = await response.json();
 
@@ -170,7 +172,7 @@ function Home() {
         </nav>
         <div>
           <button className="bg-blue-700 px-4 py-2 rounded hover:bg-blue-600">
-            Anna Komodo
+            Assia Karkoubi
           </button>
         </div>
       </header>
@@ -182,42 +184,9 @@ function Home() {
           <h2 className="text-2xl font-semibold mb-4">AI Strategy</h2>
           <div className="flex flex-col lg:flex-row justify-between">
             {/* Chart */}
-            <div className="w-full lg:w-3/4 mb-6 lg:mb-0">
-              <div
-                ref={chartContainerRef}
-                className="rounded-lg shadow-md"
-              ></div>
-            </div>
+            {<Chart />}
             {/* Trading History Panel */}
-            <div className="w-full lg:w-1/4 bg-blue-800 p-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">Trading History</h3>
-              <ul className="space-y-2">
-                {tradingHistory.map((coin) => (
-                  <li
-                    key={coin.id}
-                    className="flex justify-between items-center"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <img
-                        src={coin.image}
-                        alt={coin.name}
-                        className="w-5 h-5"
-                      />
-                      <span>{coin.symbol.toUpperCase()}/USD</span>
-                    </div>
-                    <span
-                      className={
-                        parseFloat(coin.changePercent24Hr) >= 0
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }
-                    >
-                      {parseFloat(coin.changePercent24Hr).toFixed(2)}%
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {<History />}
           </div>
         </div>
 
