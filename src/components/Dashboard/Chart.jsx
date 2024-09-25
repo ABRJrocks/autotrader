@@ -27,7 +27,7 @@ function TradingViewWidget() {
       "hide_side_toolbar": false,
       "save_image": false,
       "details": true,
-      "hotlist": true,
+      "hotlist": false,
       "calendar": false,
       "studies": [
         "STD;EMA"
