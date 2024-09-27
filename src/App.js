@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Home from "./components/Dashboard/Dashboard";
+import Settings from "./components/Dashboard/Settings";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -46,6 +47,10 @@ function App() {
         <Route
           path="/home"
           element={user ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/settings"
+          element={user ? <Settings /> : <Navigate to="/login" />}
         />
         {/* Default route */}
         <Route path="/" element={<Navigate to={user ? "/home" : "/login"} />} />

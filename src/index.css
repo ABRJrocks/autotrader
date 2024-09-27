@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background: rgb(103, 35, 212);
+} */
+
+
+
+@layer utilities {
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .neumorphism {
+    box-shadow: 8px 8px 16px #0a0a0a, -8px -8px 16px #333333;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
+  }
 }
