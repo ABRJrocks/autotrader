@@ -15,7 +15,7 @@ function Home() {
   const fetchChartData = async () => {
     try {
       const response = await fetch(
-        "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24",
+        "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24"
       );
       const data = await response.json();
 
@@ -111,21 +111,26 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-gray-900 text-white">
       <Header />
-      <div className="p-8">
-        <div className="bg-blue-900 p-6 rounded-lg shadow-lg mb-8">
+      <div className="p-4 md:p-8">
+        {/* Live Chart Section */}
+        <div className="bg-blue-900 p-4 md:p-6 rounded-lg shadow-lg mb-8">
           <h2 className="text-2xl font-semibold mb-4">Live Chart</h2>
-          <div className="flex flex-col lg:flex-row justify-between">
+          <div className="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-4">
             <Chart />
             <History />
           </div>
         </div>
-        <div className="bg-blue-900 p-6 rounded-lg shadow-lg">
+
+        {/* Wallet Section */}
+        <div className="bg-blue-900 p-4 md:p-6 rounded-lg shadow-lg mb-8">
           <h2 className="text-2xl font-semibold mb-4">Wallet</h2>
           <Wallet />
         </div>
-        <div className="bg-blue-900 p-6 rounded-lg shadow-lg">
+
+        {/* Live Deck Section */}
+        <div className="bg-blue-900 p-4 md:p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Live Deck</h2>
-          <div className="overflow-x-auto p-6">
+          <div className="overflow-x-auto p-4 md:p-6">
             <LiveDeck />
           </div>
         </div>
