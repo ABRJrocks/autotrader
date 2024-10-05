@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -11,10 +10,12 @@ import Home from "./components/Dashboard/Dashboard";
 import Settings from "./components/Dashboard/Settings";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import TBotLogo from "./TBotLogo";
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // To handle loading state
+  const [isMobile, setIsMobile] = useState(false); // Mobile device detection
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -27,10 +28,39 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    // Detect if the user is on a mobile device based on screen width
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // Set breakpoint for mobile
+    };
+
+    checkIsMobile(); // Check on load
+
+    // Listen for window resize to handle mobile resize behavior
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <TBotLogo />
         <p className="text-xl">Loading...</p>
+      </div>
+    );
+  }
+
+  // Show message if on a mobile device
+  if (isMobile) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
+        <TBotLogo />
+        <p className="text-2xl font-bold mt-4">
+          Please open the app on a desktop browser.
+        </p>
       </div>
     );
   }
