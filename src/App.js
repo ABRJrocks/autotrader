@@ -56,11 +56,13 @@ function App() {
   // Show message if on a mobile device
   if (isMobile) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
-        <TBotLogo />
-        <p className="text-2xl font-bold mt-4">
-          Please open the app on a desktop browser.
-        </p>
+      <div className="flex flex-col items-center  min-h-screen bg-gray-800 text-white overflow-hidden">
+        <div className="flex flex-col items-center justify-center mt-[60%]">
+          <TBotLogo />
+          <p className="text-2xl font-bold mt-4 text-center">
+            Please open the app on a desktop browser.
+          </p>
+        </div>
       </div>
     );
   }
